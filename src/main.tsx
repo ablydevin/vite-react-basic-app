@@ -1,9 +1,40 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
-import { AblyProvider } from '@ably-labs/react-hooks'
-//import * as Ably from 'ably';
+import React from 'react'
+//import { AblyProvider } from '@ably-labs/react-hooks'
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  // <AblyProvider options={ { authUrl:'/api/v1' } }>
+  <App />
+  // </AblyProvider>
+  
+  // I'd prefer to be able to use StrictMode, but right now it fails.
+  // <React.StrictMode>
+  //   <App />
+  // </React.StrictMode>,
+  )
+
+  // This is the template default
+  // <React.StrictMode>
+  //   <App />
+  // </React.StrictMode>,
+
+  // This does not work correctly - the Ably connection drops
+  // <React.StrictMode>
+  // <AblyProvider options={ { key: 'my-key', clientId: 'me' } }>
+  //   <App />
+  // </AblyProvider>
+  // </React.StrictMode>
+
+  // This seems to work correctly
+  //<React.StrictMode>
+  // <AblyProvider client={ client } }>
+  //   <App />
+  // </AblyProvider>
+  //</React.StrictMode>
+
+  //import * as Ably from 'ably';
 //import { AblyProvider } from '@ably-labs/react-hooks'
 
 // const options = { 
@@ -20,30 +51,3 @@ import { AblyProvider } from '@ably-labs/react-hooks'
 //   authUrl:'/api/authentication/token-auth'
 // }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  // <React.StrictMode>
-  //   <App />
-  // </React.StrictMode>,
-
-
-  // This seems to work correctly
-  // <AblyProvider options={ { key: '', clientId: 'me' } }>
-  //   <App />
-  // </AblyProvider>
-
-  // This does not work correctly - the Ably connection drops
-  <React.StrictMode>
-  <AblyProvider options={ { key: 'my-key', clientId: 'me' } }>
-    <App />
-  </AblyProvider>
-  </React.StrictMode>
-
-  // This seems to work correctly
-  //<React.StrictMode>
-  // <AblyProvider client={ client } }>
-  //   <App />
-  // </AblyProvider>
-  //</React.StrictMode>
-
-
-)
