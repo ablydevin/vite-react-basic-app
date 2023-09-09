@@ -1,10 +1,13 @@
+import { Realtime } from 'ably';
 import { AblyProvider, useChannel, usePresence } from '@ably-labs/react-hooks'
 import { useState } from 'react';
 
 function App() {
 
+  const client = new Realtime.Promise ({ authUrl: '/api/token' });
+
   return (
-    <AblyProvider options= { { authUrl: '/api/token'} } >
+    <AblyProvider client={client} >
       <AblyPubSubChannels />
     </AblyProvider>
     )
