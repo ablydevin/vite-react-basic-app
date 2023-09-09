@@ -1,10 +1,10 @@
-import { Realtime } from 'ably';
-import { AblyProvider, useChannel, usePresence } from '@ably-labs/react-hooks'
+import * as Ably from 'ably';
+import { AblyProvider, useChannel, usePresence } from 'ably/react'
 import { useState } from 'react';
 
 function App() {
 
-  const client = new Realtime.Promise ({ authUrl: '/api/token' });
+  const client = new Ably.Realtime.Promise ({ authUrl: '/api/token' });
 
   return (
     <AblyProvider client={client} >
@@ -31,7 +31,7 @@ function AblyPubSubChannels() {
   )
 }
 function Messages() {
-  const { channel } = useChannel("ably-demo", (message) => {
+  const { channel } = useChannel("ably-demo", (message: Ably.Types.Message) => {
     console.log(message)
   });
   return (
@@ -54,36 +54,3 @@ function Presence() {
     </div>
   )
 }
-
-// Simplest Ably subscribe code
-// function App() {
-//   return (
-//     <AblyProvider options= { { authUrl: '/api/v1'} } >
-//       <Messages />
-//     </AblyProvider>
-//     )
-// }
-// export default App;
-
-// function Messages() {
-//   useChannel("foobar", (message) => {
-//     console.log(message)
-//   });
-//   return (<div></div>)
-// }
-
-
-
-//import * as Ably from 'ably';
-
-// const client = new Ably.Realtime.Promise({
-//   key: "fqOR-g.V8I2qw:Xfy4MTKbVqFDE4oKjDuV2SyCxAKrQcdJC3GrO1cmwFg", 
-//   clientId: "me"
-// });
-
-
-// import './App.css'
-
-// <AblyProvider client = { client } >
-// <Messages />
-// </AblyProvider>

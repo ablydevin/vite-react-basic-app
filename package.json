@@ -13,16 +13,15 @@
     "express": "^4.18.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "vite-plugin-api": "^0.1.11"
+    "vite-plugin-api": "^1.0.1"
   },
   "devDependencies": {
-    "@ably-labs/react-hooks": "file:../react-hooks",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "@vitejs/plugin-react": "^4.0.3",
-    "ably": "^1.2.43",
+    "ably": "^1.2.44",
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
