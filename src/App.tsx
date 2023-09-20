@@ -6,30 +6,18 @@ function App() {
 
   const client = new Ably.Realtime.Promise ({ authUrl: '/api/token' });
 
+  const [isOnline, setIsOnline] = useState<boolean>(true);
+
   return (
     <AblyProvider client={client} >
-      <AblyPubSubChannels />
+      <Messages />
+      { isOnline && <Presence /> }
+      <button onClick={(event:React.MouseEvent<HTMLButtonElement>) => { setIsOnline(!isOnline)}}>Toggle Presence</button>
     </AblyProvider>
     )
 }
 export default App;
 
-function AblyPubSubChannels() {
-
-  const [isOnline, setIsOnline] = useState<boolean>(true);
-
-  function presence() {
-    return (isOnline) ? <Presence /> : <></>
-  }
-
-  return (
-    <>
-      <Messages />
-      { presence() }
-      <button onClick={(event:React.MouseEvent<HTMLButtonElement>) => { setIsOnline(!isOnline)}}>Toggle Presence</button>
-    </>
-  )
-}
 function Messages() {
   const { channel } = useChannel("ably-demo", (message: Ably.Types.Message) => {
     console.log(message)
@@ -43,7 +31,7 @@ function Messages() {
 
 function Presence() {
   const { presenceData, updateStatus } = usePresence<string>("ably-demo", 'current status');
-  const peers = presenceData.map((msg, index) => <li key={index}>{msg.clientId}: {msg.data}</li>);
+  const peers = presenceData.map((msg, index) => <li key={msg.id}>{msg.clientId}: {msg.data}</li>);
 
   return (
     <div>
